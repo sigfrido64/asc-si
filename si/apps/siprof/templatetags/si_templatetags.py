@@ -9,7 +9,6 @@ def get_item(dictionary, key):
 
 @register.filter
 def can_add(user, app):
-    print(user)
     return user.profile.can_add(app)
 
 

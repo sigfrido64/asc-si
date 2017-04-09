@@ -86,7 +86,7 @@ TEMPLATES = [
 ]
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
 
 
 # Application definition
@@ -223,7 +223,7 @@ DEBUG_TOOLBAR_PANELS = [
 # Aggiunge il supporto di Ajax alla Toolbar
 #
 DEBUG_TOOLBAR_CONFIG = {
-    'SHOW_TOOLBAR_CALLBACK': 'ddt_request_history.panels.request_history.allow_ajax',
+    'SHOW_TOOLBAR_CALLBACK': config('SHOW_TOOLBAR_CALLBACK', cast=lambda v: v if v != '' else lambda r: False),
 }
 
 #

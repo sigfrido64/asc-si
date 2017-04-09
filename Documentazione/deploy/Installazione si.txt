@@ -129,6 +129,12 @@ Aggiornamento del repository mediante git
 per allineare il mio repository con quello remoto uso : git remote update
 per estrarre il remoto e mettere in linea il tutto uso : git merge origin/master
 
+git fetch origin
+git reset --hard origin/master
+Followed by:
+
+git clean -f
+
 A questo punto la mia copia locale � uguale a quella remota.
 
 

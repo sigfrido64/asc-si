@@ -122,7 +122,6 @@ def ordacq_import(request):
     if request.method == 'POST':
         ordacq_resource = OrdacqResource()
         dataset = Dataset()
-        print("Prima di accedere a Myfile")
         new_ordacq = request.FILES['myfile']
 
         imported_data = dataset.load(new_ordacq.read(), 'xls')

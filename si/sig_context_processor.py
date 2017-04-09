@@ -7,9 +7,10 @@ __author__ = "Sig"
 def permissions(request):
     """
     Se l'utente è loggato recupera la lista dei suoi permessi e la mette nel dizionario 'si_perms'.
-    Il dizionario serve per tutti gli usi interni e nei templates per la produzione dei menu.
+    Il dizionario serve per tutti gli usi interni E NEI TEMPLATES per la produzione dei menu !!!
+    Occhio che li non lo vedi e non te ne ricordi più dopo !
     La gestione degli accessi viene poi lasciata al decoratore della singola funzione.
-    DIREI CHE ORMAI E' OBSOLETO VISTO CHE FACCIO TUTTO DIVERSAMENTE !
+    
 
     :param request:
     :return:

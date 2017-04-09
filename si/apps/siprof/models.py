@@ -67,9 +67,7 @@ class Profile(models.Model):
         :param app: Il nome dell'APP di cui voglio verificare i permessi.
         :return: I permessi attualmente posseduti su quell'app per l'azienda su cui sto operando.
         """
-        print("Actual Perm")
         real_app = app if app in self.__SYSAPP else self.azienda + '.' + app
-        print("real_app :" + real_app)
         return self.permissions.get(real_app, 0)
 
     #
