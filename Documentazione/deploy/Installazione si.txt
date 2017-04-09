@@ -47,6 +47,42 @@ root@debian #) git clone https://github.com/sigfrido64/asc-si.git si
 
 
 
+*** INSTALLAZIONE DI POSTGRESQL ***
+
+root@debian #) apt-get install postgresql postgresql-contrib
+
+Una volta installato il pacchetto posso passare all'utente 'postgres' e lanciare l'interprete sql di Postgres !
+
+root@debian #) sudo su - postgres
+postgres@debian #) psql
+
+Poi creo il database, l'utente e gli do pieni poteri sul database che ho appena creato.
+Parto dal principio che il database si chiamerà ASC, l'utente ASC e la password sia 'Camerana'
+
+postgres=# CREATE DATABASE "ASC";
+postgres=# CREATE USER "ASC" WITH PASSWORD 'Camerana';
+
+Da articolo di installazione :
+We are setting the default encoding to UTF-8, which Django expects.
+We are also setting the default transaction isolation scheme to "read committed", which blocks reads from
+uncommitted transactions.
+Lastly, we are setting the timezone. By default, our Django projects will be set to use UTC:
+
+postgres=# ALTER ROLE myprojectuser SET client_encoding TO 'utf8';
+postgres=# ALTER ROLE myprojectuser SET default_transaction_isolation TO 'read committed';
+postgres=# ALTER ROLE myprojectuser SET timezone TO 'UTC';
+
+Ora do i privilegi completi sul database che ho creato all'utente "ASC"
+
+postgres=# GRANT ALL PRIVILEGES ON DATABASE "ASC" TO "ASC";
+
+Quindi posso uscire !
+
+postgres=# \q
+postgres@debian #) exit
+
+
+
 *** INSTALLAZIONE DI VIRTUALENV ***
 
 A questo punto installo Virtualenv. Attenzione all'appendice se lavori sotto windows e comunque se sulla macchina
