@@ -1,0 +1,231 @@
+{% extends 'basejqx_old.html' %}
+{% load staticfiles %}
+
+{% block title %}Lista Corsi{% endblock %}
+
+{% block body_block %}
+
+<br>
+<div>
+    Filtro Corso : <input type="text" id="filtroCorso"/><input type="button" value="Go" id='filtro' />
+</div><br><br>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Zona di interfaccia Javascript con Django.
+        var filtro = $("#filtro");
+        var griglia = $("#jqxgrid")
+
+        // Definisce il pulsante.
+        filtro.jqxButton();
+        // Associa funzione di callback che chiede refresh della griglia.
+        filtro.on("click", function () {
+            griglia.jqxGrid('updatebounddata');
+        });
+    });
+</script>
+
+
+<div id="jqxgrid"></div>
+
+<div id="jqxwindow">
+    <div id="titolo">Conferma Cancellazione</div>
+    <div><div align="center">!!! ATTENZIONE !!!</div><br>
+        Si sta per eliminare definitivamente un elemento dal data base.<br>
+        L'operazione non potrà essere annullata. <br><br>
+        Elemento : <span id="elemento">XXX</span>
+        <br><br>
+        Annullo operazione ?
+        <div align="center">
+                <input type="button" value="Si" id="button_yes" src='{% static "jqw/images/close.png" %}'/>
+                <input type="button" value="No" id="button_no" />
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Zona di interfaccia Javascript con Django.
+        var dj_finestra = $("#jqxwindow");
+        var dj_grid = $("#jqxgrid");
+
+        // !! Qui inizia il codice che NON DEVE essere modificato !!
+        // Definizione della finestra per conferma cancellazione
+        dj_finestra.jqxWindow({
+            height: 'auto',
+            width: 'auto',
+            // theme: 'energyblue',
+            autoOpen: false,
+            isModal: true,
+            showCloseButton: false
+        });
+
+        // Creo il metodo per aprire la finestra e lanciare il codice quando serve.
+        // Definisco la variabile in cui memorizzare l'ID dell'elemento che poi, se decido di si, sarà
+        // cancellato.
+        var id = null;
+        confermaCancellazione = function(par_id, par_elemento) {
+            // Salva id nella variabile locale.
+            id = par_id;
+
+            // Imposta il testo dell'elemento che deve mostrare.
+            var elemento = dj_finestra.find("#elemento");
+            elemento.text(par_elemento);
+
+            // Apre la finestra di richiesta della conferma.
+            dj_finestra.jqxWindow('open');
+        };
+
+        // Gestione dei pulsanti della finestra.
+        // Yes : Abbandono la procedura di cancellazione.
+        var button_yes = dj_finestra.find("#button_yes");
+        button_yes.on('click', function(){dj_finestra.jqxWindow('close')});
+
+        // No : Chiamo il callback di cancellazione.
+        var button_no = dj_finestra.find("#button_no");
+        button_no.on('click', function(){dj_grid.jqxGrid('deleterow', id)});
+    });
+</script>
+
+
+
+
+       <script type="text/javascript">
+        $(document).ready(function () {
+            // Settaggi del modulo secondo Django.
+            var url_add = "{% url 'corsi:add' %}";
+            var btn_add = true;
+            var url_static = "{% static 'jqw/images/' %}";
+
+            var url = "/si/corsi/api/get_corsi/";
+            var grid = $("#jqxgrid");
+            // prepare the data
+            var source = {
+                datatype: "json",
+                datafields: [
+                    { name: 'codice' },
+                    { name: 'denominazione' },
+                    { name: 'durata' },
+                    { name: 'ordine' },
+                    { name: 'pk' },
+                ],
+                id: 'pk',
+                url: url,
+                root: 'data',
+                data: {
+
+                    style: "full",
+                    maxRows: 50
+                },
+                deleterow: function (rowid, commit) {
+                    // synchronize with the server - send delete command
+                    // call commit with parameter true if the synchronization with the server was successful
+                    // and with parameter false if the synchronization has failed.
+                    alert("Chiamata alla procedura di cancellazione !");
+                    alert("Rowid : " + rowid);
+                    commit(true);
+                }
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                formatData: function (data) {
+                    $.extend(data, {
+                        filtroCorso: $('#filtroCorso').val(),
+                        style: "full",
+                        maxRows: 50
+                    });
+                return data;
+                }
+            });
+            grid.jqxGrid({
+                width: "100%",
+                source: dataAdapter,
+                columnsresize: true,
+                editable: false,
+                autoheight: true,
+                autorowheight: true,
+                pageable: true,
+                pagesize: 20,
+                filterable: true,
+                sortable: true,
+                autoshowfiltericon: true,
+                columns: [
+                    { text: 'Codice Corso', dataField: 'codice', width: "10%" },
+                    { text: 'Denominazione', dataField: 'denominazione', width: "70%" },
+                    { text: 'Durata', dataField: 'durata', width: "10%" },
+                    { text: 'Ordine', dataField: 'ordine', width: "10%" }
+                ],
+                showstatusbar: true,
+                renderstatusbar: function (statusbar) {
+                    // appends buttons to the status bar.
+                    var container = $("<div style='overflow: hidden; position: relative; margin: 5px;'></div>");
+                    var deleteButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='{% static "jqw/images/close.png" %}'/><span style='margin-left: 4px; position: relative; top: -3px;'>Delete</span></div>");
+
+                    var searchButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='{% static "jqw/images/search.png" %}'/><span style='margin-left: 4px; position: relative; top: -3px;'>Find</span></div>");
+
+                    // Se richiedo il pulsante Add lo inserisce nell'insieme.
+                    if (btn_add) {
+                        // Definisce il pulsante e lo aggiunge alla status bar.
+                        var addButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='" + url_static + "add.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Add</span></div>");
+                        container.append(addButton);
+                        addButton.jqxButton({  width: 65, height: 20 });
+                        // Gli associa la funzione di callback.
+                        addButton.click(function (event) {
+                            window.location.href = url_add;
+                        });
+                    }
+
+                    container.append(deleteButton);
+
+                    // Inserisco il pulante reload.
+                    var reloadButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='" + url_static + "refresh.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Reload</span></div>");
+                    container.append(reloadButton);
+                    reloadButton.jqxButton({  width: 65, height: 20 });
+                    // Gli associa la funzione di callback.
+                    reloadButton.click(function (event) {
+                        $("#jqxgrid").jqxGrid('updatebounddata');
+                    });
+
+
+
+                    container.append(searchButton);
+                    statusbar.append(container);
+
+                    deleteButton.jqxButton({  width: 65, height: 20 });
+
+                    searchButton.jqxButton({  width: 50, height: 20 });
+
+                    // delete selected row.
+                    deleteButton.click(function (event) {
+                        var selectedrowindex = $("#jqxgrid").jqxGrid('getselectedrowindex');
+                        var rowscount = $("#jqxgrid").jqxGrid('getdatainformation').rowscount;
+                        var id = $("#jqxgrid").jqxGrid('getrowid', selectedrowindex);
+                        // Che faccio se chiamo senza selezionare una riga ?
+                        // $("#jqxwindow").cacca("Pippaiolo");
+                        // $("#jqxwindow").jqxWindow('open');
+                        confermaCancellazione(id, "Pippa");
+                        // $("#jqxwindow").confermaCancellazione(id, "Pippa !");
+                        // $("#jqxgrid").jqxGrid('deleterow', id);
+                    });
+                    // search for a record.
+                    searchButton.click(function (event) {
+                        var offset = $("#jqxgrid").offset();
+                        $("#jqxwindow").jqxWindow('open');
+                        $("#jqxwindow").jqxWindow('move', offset.left + 30, offset.top + 30);
+                    });
+                },
+            });
+            grid.on("celldoubleclick", function (event) {
+                var args = event.args;
+                var rowBoundIndex = args.rowindex;
+                var colIndex = args.columnindex;
+                var value = $('#jqxgrid').jqxGrid('getcellvalue', rowBoundIndex, 'pk');
+                var url_mask = "{% url 'corsi:edit' pk=12345 %}".replace(/12345/, value.toString());
+                window.location.href = url_mask;
+            });
+        });
+
+
+    </script>
+
+
+{% endblock %}
+

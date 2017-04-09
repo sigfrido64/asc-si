@@ -1,0 +1,82 @@
+{% extends 'base-jqxrenamed.html' %}
+
+{% load si_templatetags %}
+
+{% block title %}Dettaglio Sotto Iniziativa{% endblock %}
+{% block header %}Dettaglio Sotto Iniziativa{% endblock %}
+
+{% block body_block %}
+
+{% si_dc_dialog %}
+
+<table border="1" style="width:100%">
+    <tr class="thead">
+        <td>Sotto Iniziativa : {{ sottoiniziativa.nome }}</td>
+        <td>Iniziativa Padre : {{ iniziativa.nome }}</td>
+    </tr>
+    <tr>
+        <td>
+            Descrizione: {{ sottoiniziativa.descrizione }}<br>
+            In uso : {{ sottoiniziativa.in_uso|yesno:"Si,No" }}
+        </td>
+        <td>
+            Descrizione: {{ iniziativa.descrizione }}<br>
+            CUP/CIG: {{ iniziativa.cup_cig }}<br>
+            In uso : {{ iniziativa.in_uso|yesno:"Si,No" }}
+        </td>
+    </tr>
+    <tr class="small">
+        <td>
+            Data Aggiornamento: {{ sottoiniziativa.data_aggiornamento|date }}<br>
+            Data Creazione: {{ sottoiniziativa.data_creazione|date }}
+        </td>
+        <td>
+            Data Aggiornamento: {{ iniziativa.data_aggiornamento|date }}<br>
+            Data Creazione: {{ iniziativa.data_creazione|date }}
+        </td>
+    </tr>
+</table>
+
+<p class="text-center">
+    <a class="easyui-linkbutton" iconCls="icon-back" href="{% url 'iniziative:detail' iniziativa.pk %}">Indietro</a>
+    <a class="easyui-linkbutton" iconCls="icon-edit" href="{% url 'iniziative:sub_edit' sottoiniziativa.pk %}">Modifica</a>
+</p>
+
+{% if raggruppamenti %}
+    <table  class="easyui-datagrid" title="Raggruppamenti Correlati">
+        <thead>
+            <tr>
+                <th data-options="field:'Nome'">Nome</th>
+                <th data-options="field:'Descrizione'">Descrizione</th>
+                <th data-options="field:'Azione'">Azione</th>
+            </tr>
+        </thead>
+        {% for raggruppamento in raggruppamenti %}
+            <tr>
+                <td><a href="{% url 'iniziative:grp_detail' raggruppamento.pk %}">{{ raggruppamento.nome }}</a></td>
+                <td>{{ raggruppamento.descrizione }}</td>
+                <td>
+                    <a titolo="Cancellazione Raggruppamento" item="{{ raggruppamento.nome }}"
+                       link="{% url 'iniziative:grp_delete' raggruppamento.pk %}"
+                       class="easyui-linkbutton remove_link" data-options="iconCls:'icon-cancel'" href="{% url 'index' %}">Del
+                    </a>
+
+                    <a class="easyui-linkbutton" iconCls="icon-edit" href="{% url 'iniziative:grp_edit' raggruppamento.pk %}">Edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <div class="si-title">Raggruppamenti Correlati</div>
+    <div class="jumbotron">
+        Nessuno Presente !
+    </div>
+{% endif %}
+
+<div align="center">
+    <p>
+        <a class="easyui-linkbutton" iconCls="icon-add" href="{% url 'iniziative:grp_add' sottoiniziativa.pk %}">Aggiungi Raggruppamento</a>
+    </p>
+</div>
+
+{% endblock %}

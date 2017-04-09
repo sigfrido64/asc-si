@@ -1,0 +1,71 @@
+{% extends 'base-jqxrenamed.html' %}
+
+{% block title %}Selezione Iniziativa{% endblock %}
+{% block header %}Selezione Raggruppamento (doppio click per selezionare){% endblock %}
+
+{% block body_block %}
+
+<script>
+$(function(){
+  $('#iniziativa').datalist({
+    url: '/si/iniziative/api/get_iniziative',
+    checkbox: false,
+    lines: true,
+    method: 'get',
+    valueField: 'id',
+    onDblClickRow: function(index,row){
+		$('#sottoiniziativa').datalist('reload',{
+	        pk: row.id
+        });
+   		$('#raggruppamento').datalist('reload',{
+	        pk: 0
+        });
+	}
+  });
+
+  $('#sottoiniziativa').datalist({
+    url: '/si/iniziative/api/get_sottoiniziative',
+    checkbox: false,
+    lines: true,
+    method: 'get',
+        onDblClickRow: function(index,row){
+		$('#raggruppamento').datalist('reload',{
+	        pk: row.id
+        });
+	}
+  });
+
+  $('#raggruppamento').datalist({
+    url: '/si/iniziative/api/get_raggruppamenti',
+    checkbox: false,
+    lines: true,
+    method: 'get'
+  });
+});
+ </script>
+
+
+<div id="dlg" class="easyui-dialog" title="Basic Dialog" data-options="iconCls:'icon-save'" style="width:90%;height:80%;padding:10px">
+    <div class="easyui-layout" style="width:100%;height:350px;">
+         <!-- Sezione Centrale -->
+         <div data-options="region:'west',split:true" style="width:33%">
+             <div id="iniziativa" class="easyui-datalist" title="Iniziative" lines="true" style="width:100%;height:250px"></div>
+         </div>
+
+          <div data-options="region:'center',split:true" style="width:33%">
+             <div id="sottoiniziativa" class="easyui-datalist" title="Sotto-Iniziative Correlate" lines="true" style="width:100%;height:250px"></div>
+         </div>
+
+         <div data-options="region:'east',split:true" style="width:33%">
+             <div id="raggruppamento" class="easyui-datalist" title="Raggruppamenti Correlati" lines="true" style="width:100%;height:250px"></div>
+         </div>
+    </div>
+
+
+    <div id="dlg-buttons">
+        <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="$('#iniziativa').datalist('reload')">Reload</a>
+    </div>
+</div>
+
+{% endblock %}
+

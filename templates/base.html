@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Sistema informativo Assocam Scuola Camerana">
+    <meta name="author" content="Pilone Ing. Sigfrido">
+
+    <!-- Titolo della pagina che viene sostituito nell'implementazione -->
+    <title>SI - {% block title %} Titolo {% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/4.0.0-alpha.6/css/bootstrap.min.css' %}" >
+
+    <!-- Fonts Awesome -->
+    <link rel="stylesheet" href="{% static 'fa470/css/font-awesome.min.css' %}">
+
+    <!-- Custom styles -->
+    {% block css %}{% endblock %}
+  </head>
+  <body>
+    <div class="container-fluid">
+      <!-- Toolbar -->
+      {% block toolbar %}{% include "includes/partial_menu.html" %}{% endblock %}
+      <br><br><br>
+
+
+      {% block content %}
+      {% endblock %}
+    </div>
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'tether/1.4.0/tether.min.js' %}"></script>
+    <script src="{% static 'bootstrap/4.0.0-alpha.6/js/bootstrap.min.js' %}"></script>
+
+    {% block javascript %}
+    {% endblock %}
+  </body>
+</html>

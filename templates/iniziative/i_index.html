@@ -1,0 +1,54 @@
+{% extends 'base-jqxrenamed.html' %}
+
+{% load si_templatetags %}
+
+{% block title %}Lista Iniziative{% endblock %}
+{% block header %}Lista Iniziative{% endblock %}
+
+{% block body_block %}
+
+    {% si_dc_dialog %}
+
+    {% if lista_iniziative %}
+        <div>
+            <table class="easyui-datagrid">
+                <thead>
+                    <tr>
+                        <th data-options="field:'Nome'">Nome</th>
+                        <th data-options="field:'Descrizione'">Descrizione</th>
+                        <th data-options="field:'Azione'">Azione</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% for iniziativa in lista_iniziative %}
+                    <tr>
+                        <td><a href="{% url 'iniziative:detail' iniziativa.pk %}">{{ iniziativa.nome }}</a></td>
+                        <td>{{ iniziativa.descrizione }}</td>
+                        <td>
+                            <a titolo="Cancellazione Iniziativa" item="{{ iniziativa.nome }}"
+                               link="{% url 'iniziative:delete' iniziativa.pk %}"
+                               class="easyui-linkbutton remove_link" iconCls="icon-cancel" href="{% url 'index' %}">
+                            Del</a>
+                            <a class="easyui-linkbutton" iconCls="icon-edit" href="{% url 'iniziative:edit' iniziativa.pk %}">Edit</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+       <div class="si-title">Iniziative</div>
+        <div class="jumbotron">
+            Nessuna Presente !
+        </div>
+    {% endif %}
+
+    <div align="center">
+        <p>
+            <a class="easyui-linkbutton" iconCls="icon-add" href="{% url 'iniziative:add' %}">Aggiungi iniziativa</a>
+        </p>
+    </div>
+{% endblock %}
+
+

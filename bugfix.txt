@@ -1,0 +1,6 @@
+###
+N. 1: Se faccio upload di un file che esiste già me lo carica con un pezzo in più nel nome file e questo si può perdere
+    nel Data Base perchè la lunghezza del campo è minore. Inoltre sarebbe meglio che il caricamento non venisse
+    proprio effettuato se esiste già una voce nel db.
+
+Status : TODO

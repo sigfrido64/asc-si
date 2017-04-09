@@ -1,0 +1,81 @@
+{% extends "basejqx_old.html" %}
+
+{% block title %}Aziende{% endblock %}
+
+{%  block javascript %}
+    <style type="text/css">
+        ul.errorlist {
+            margin: 0;
+            padding: 0;
+        }
+        .errorlist li {
+            background-color: red;
+            color: white;
+            display: block;
+            font-size: 10px;
+            margin: 0 0 3px;
+            padding: 4px 5px;
+        }
+        .fieldWrapper {
+            margin: 10px;
+        }
+        .note {
+            font-size: 15px;
+            font-style: italic;
+            margin: 10px;
+        }
+        .row {
+            padding: 0 15px;
+            margin: 15px -15px 15px;
+        }
+    </style>
+    <script>
+    $(document).ready(function () {
+        // Creo i vari controlli.
+        $("#id_ragione_sociale").jqxInput({width: 300, height: 25 });
+        $("#id_cf").jqxInput({width: 200, height: 25 });
+        $("#id_sito_web").jqxInput({width: 300, height: 25 });
+        $("#id_note").jqxTextArea({ height: 90, width: 600, minLength: 1 });
+        // Pulsanti
+        $("#submitbutton").jqxButton({ template: "default" });
+        $("#cancelbutton").jqxButton({ template: "danger" });
+    });
+    </script>
+
+{% endblock %}
+
+{% block body_block %}
+<form id="ff" method="post">
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="col-md-7">
+            {{ form.ragione_sociale.errors }}
+            {{ form.ragione_sociale.label_tag }} {{ form.ragione_sociale }}
+        </div>
+        <div class="col-md-5">
+            {{ form.cf.errors }}
+            {{ form.cf.label_tag }} {{ form.cf }}
+        </div>
+    </div>
+    <div class="row">
+        {{ form.sito_web.errors }}
+        {{ form.sito_web.label_tag }} {{ form.sito_web }}
+    </div>
+    <div class="row">
+        {{ form.note.errors }}
+        {{ form.note.label_tag }} {{ form.note }}
+    </div>
+    <div class="note">
+        <br>
+        Hash : {{ form.hash.value }} <br>
+        Data Ultima Modifica : {{ form.dts_aggiornamento.value }} &nbsp;&nbsp;&nbsp;&nbsp;
+        Data Creazione : {{ form.dts_creazione.value }}
+    </div>
+    <div align="center"><!-- Pulsanti -->
+        <input style='margin-top: 20px;' type="submit" value="Salva" id='submitbutton' />
+        <input style='margin-top: 20px;' type="cancel" value="Annulla" id='cancelbutton' />
+    </div><!-- Pulsanti -->
+
+</form>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h3>Sistema Informatico Interno</h3>
+
+  <div class="jumbotron">
+  {% if user.is_authenticated %}
+    <p>Benvenuto {{ user.get_username }} !</p>
+  {% else %}
+    <p>Ciao utente Anonimo !</p>
+  {% endif %}
+  </div>
+
+{% endblock %}

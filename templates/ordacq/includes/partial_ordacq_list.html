@@ -1,0 +1,37 @@
+{% for ordacq in ordacq_list %}
+  <tr>
+    <td>{{ ordacq.id }}</td>
+    <td>{{ ordacq.protocollo }}</td>
+    <td>{{ ordacq.data }}</td>
+    <td>{{ ordacq.competenza }}</td>
+    <td>{{ ordacq.stato }}</td>
+    <td>{{ ordacq.fornitore }}</td>
+    <td>{{ ordacq.descrizione }}</td>
+    <td>
+      {% if user|can_read:app %}
+        <button type="button" class="btn btn-primary btn-sm js-update-ordacq"
+          data-url="{% url 'ordacq:update' ordacq.id %}">
+          <i class="fa fa-eye" aria-hidden="true"></i>
+        </button>
+      {% endif %}
+
+      {% if user|can_update:app %}
+        <button type="button" class="btn btn-primary btn-sm js-update-ordacq"
+          data-url="{% url 'ordacq:update' ordacq.id %}">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        </button>
+      {% endif %}
+
+      {% if user|can_delete:app %}
+        <button type="button" class="btn btn-danger btn-sm js-delete-ordacq"
+          data-url="{% url 'ordacq:delete' ordacq.id %}">
+          <span class="fa fa-trash" aria-hidden="true"></span>
+        </button>
+      {% endif %}
+    </td>
+  </tr>
+{% empty %}
+    <tr>
+      <td colspan="8" class="text-center bg-warning">Non sono presenti acquisti !</td>
+    </tr>
+{% endfor %}

@@ -1,0 +1,10 @@
+Gli utenti creati per utilizzare, in prima battuta, il database sono :
+
+Amministrativo
+user : admin
+pwd : 123
+
+
+Di Lavoro
+user : ascUser
+pwd : 123

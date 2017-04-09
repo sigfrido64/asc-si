@@ -1,0 +1,31 @@
+{% extends "base-jqxrenamed.html" %}
+
+{% block title %}{{ blocktitle }}{% endblock %}
+{% block header %}{{ header }}{% endblock %}
+
+{% block body_block %}
+<script>
+    function submitForm(){
+        document.getElementById("ff").submit();
+    }
+
+    function clearForm(){
+        document.getElementById("ff").reset();
+    }
+</script>
+
+<form id="ff" class="easyui-panel" method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <div align="center">
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" data-options="iconCls:'icon-save'">Salva</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" data-options="iconCls:'icon-clear'">Clear</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="window.history.back();"
+           data-options="iconCls:'icon-back'">Indietro
+        </a>
+    </div>
+</form>
+
+{% endblock %}

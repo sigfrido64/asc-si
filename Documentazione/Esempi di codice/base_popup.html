@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="it" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Pilone Ing. Sigfrido">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static "images/favicon.ico" %}" >
+    <link rel="icon" type="image/x-icon" href="{% static "images/favicon.ico" %}" >
+
+
+    <title>SI - {% block title %}Questo non dovresti mai leggerlo !{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}" />
+
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap-theme.min.css" %}">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static "css/theme.css" %}">
+
+    <!-- Javascript per oggetti relazionali, finestre pop-up e via dicendo -->
+    <!-- <script type="text/javascript" src="{% static "js/core.js" %}"></script> -->
+    <script type="text/javascript" src="{% static "js/RelatedObjectLookups.js" %}"></script>
+
+    <!-- Custom styles for this template -->
+    <!-- <link rel="stylesheet" href="{% static "css/dashboard.css" %}" /> -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="{% static "js/html5shiv.min.js" %}"> </script>
+      <script src="{% static "js/respond.min.js" %}"> </script>
+    <![endif]-->
+
+    <style type="text/css">
+    ul.errorlist {
+        margin: 0;
+        padding: 0;
+    }
+    .errorlist li {
+        background-color: red;
+        color: white;
+        display: block;
+        font-size: 10px;
+        margin: 0 0 3px;
+        padding: 4px 5px;
+    }
+    </style>
+  </head>
+
+  <body role="document">
+
+    <div class="container-fluid theme-showcase col-sm-offset-1 col-md-offset-1" role="main">
+        <div class="row">
+            <div class="page-header">
+                <h1>{% block header %}Header - Questo non dovresti mai leggerlo !{% endblock %}</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            {% block body_block %}
+            Body - Questo non si dovrebbe mai leggere
+            {% endblock %}
+        </div>
+    </div>
+
+<script type="text/javascript">
+        (function($) {
+            $(document).ready(function() {
+                $('form#inode_form :input:visible:enabled:first').focus()
+            });
+        })(django.jQuery);
+    </script>
+
+
+
+
+<script type="text/javascript">
+(function($) {
+    var field;
+
+
+})(django.jQuery);
+</script>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/docs.min.js" %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static "js/ie10-viewport-bug-workaround.js" %}"></script>
+  </body>
+</html>

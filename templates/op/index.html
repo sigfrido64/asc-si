@@ -1,0 +1,50 @@
+{% extends 'base-jqxrenamed.html' %}
+
+{% load si_templatetags %}
+
+{% block title %}Ordini{% endblock %}
+{% block header %}Ordini di Produzione{% endblock %}
+
+{% block body_block %}
+
+    {% si_dc_dialog %}
+
+    {% if lista_ordini %}
+        <div>
+            <table class="easyui-datagrid">
+                <thead>
+                    <tr>
+                        <th data-options="field:'Ordine'">Ordine Num.</th>
+                        <th data-options="field:'Clienti'">Clienti</th>
+                        <th data-options="field:'Corsi'">Corsi</th>
+                        <th data-options="field:'Stato'">Stato</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% for ordine in lista_ordini %}
+                    <tr>
+                        <td><a href="{% url 'op:edit' ordine.ordine_numero %}">{{ ordine.ordine_numero }}</a></td>
+                        <td>{{ ordine.committenti }}</td>
+                        <td>{{ ordine.corsi }}</td>
+                        <td>{{ ordine.stato }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="jumbotron">
+            Nessuno Presente !
+        </div>
+    {% endif %}
+
+    <div align="center">
+        <p>
+            <a class="easyui-linkbutton" iconCls="icon-add" href="{% url 'op:add' %}">Nuovo Ordine</a>
+        </p>
+    </div>
+
+{% endblock %}
+
+

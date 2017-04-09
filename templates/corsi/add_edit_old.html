@@ -1,0 +1,171 @@
+{% extends "base-jqxrenamed.html" %}
+
+{% block title %}Corso{% endblock %}
+{% block header %}Dettagli Corso<strong>{{ iniziativa.nome }}</strong>{% endblock %}
+
+{% block body_block %}
+
+<script>
+    function submitForm(){
+        document.getElementById("ff").submit();
+    }
+
+    function clearForm(){
+        document.getElementById("ff").reset();
+    }
+</script>
+
+<form id="ff" class="easyui-panel" method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <table id="dg" title="Calendario Lezioni" class="easyui-datagrid" style="width:700px;height:250px"
+            url="/si/corsi/api/lezioni_getall?corso={{ form.codice_edizione.value }}"
+            toolbar="#toolbar" pagination="true"
+            rownumbers="true" fitColumns="true" singleSelect="true" data-options="method:'get'">
+        <thead>
+            <tr>
+                <th field="data" width="50">Data</th>
+                <th field="inizio" width="50">Ora Inizio</th>
+                <th field="fine" width="50">Ora Fine</th>
+                <th field="ore" width="50">Ore</th>
+                <th field="sede" width="50">Sede</th>
+            </tr>
+        </thead>
+    </table>
+    <div id="toolbar">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="lezioneAdd()">Nuova</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="lezioneEdit()">Edita</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="lezioneDel()">Elimina</a>
+    </div>
+
+    <div align="center">
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" data-options="iconCls:'icon-save'">Salva</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" data-options="iconCls:'icon-clear'">Clear</a>
+    </div>
+</form>
+
+    <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
+            closed="true" buttons="#dlg-buttons">
+        <div class="ftitle">Data ed Orario</div>
+        <form id="fm" novalidate>
+            <input type="hidden" id="frm-corso" name="corso" value="null">
+            <input type="hidden" id="frm-lezID" name="lezID" value="">
+            <div class="fitem">
+                <label>Data:</label>
+                <input name="data" class="easyui-datebox" required="true">
+            </div>
+            <div class="fitem">
+                <label>Ora Inizio:</label>
+                <input name="inizio" type="time" class="easyui-textbox" required="true">
+            </div>
+            <div class="fitem">
+                <label>Ora Fine:</label>
+                <input name="fine" type="time" class="easyui-textbox" required="true">
+            </div>
+            <div class="fitem">
+                <label>Sede:</label>
+                <input name="sede" type="text" class="easyui-textbox" required="true">
+            </div>
+        </form>
+    </div>
+    <div id="dlg-buttons">
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="lezioneSave()"
+           style="width:90px">Salva
+        </a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel"
+           onclick="$('#dlg').dialog('close')" style="width:90px">Cancel
+        </a>
+    </div>
+    <script type="text/javascript">
+        // Salva una nuova lezione.
+        var url;
+        function lezioneAdd(){
+            $('#dlg').dialog('open').dialog('center').dialog('setTitle','Dettaglio Lezione');
+            $('#fm').form('clear');
+            $('#frm-corso').val('{{ form.codice_edizione.value }}');
+            url = '/si/corsi/api/lezione_add/';
+        }
+        // Modifica una lezione esistente.
+        function lezioneEdit(){
+            var row = $('#dg').datagrid('getSelected');
+            if (row){
+                $('#dlg').dialog('open').dialog('center').dialog('setTitle','Modifica Lezione');
+                $('#fm').form('load',row);
+                $('#frm-corso').val('{{ form.codice_edizione.value }}');
+                $('#frm-lezID').val(row.id);
+                url = '/si/corsi/api/lezione_upd/';
+            }
+        }
+        // call 'submit' method of form plugin to submit the form
+        function lezioneSave(){
+            $('#fm').form('submit',{
+                url: url,
+                onSubmit: function(){
+                    return $(this).form('validate');
+                },
+                success: function(result){
+                    var result = eval('('+result+')');
+                    if (result.errorMsg){
+                        $.messager.show({
+                            title: 'Error',
+                            msg: result.errorMsg
+                        });
+                    } else {
+                        $('#dlg').dialog('close');        // close the dialog
+                        $('#dg').datagrid('reload');    // reload delle lezioni
+                    }
+                }
+            });
+        }
+        // Cancella la lezione selezionata.
+        function lezioneDel(){
+            var row = $('#dg').datagrid('getSelected');
+            if (row){
+                $.messager.confirm('Conferma','Sei sicuro di voler eliminare questa lezione ?',function(r){
+                    if (r){
+                        $.get('/si/corsi/api/lezione_del',{id:row.id, corso:'{{ form.codice_edizione.value }}'},function(result){
+                            console.log(JSON.stringify(result));
+                            if (result[0].success) console.log ("Fatto !");
+                            if (result[0].success){
+                                $('#dg').datagrid('reload');    // reload the user data
+                            } else {
+                                $.messager.show({    // show error message
+                                    title: 'Errore',
+                                    msg: result[0].errorMsg
+                                });
+                            }
+                        }, "json");
+                    }
+                });
+            }
+        }
+    </script>
+    <style type="text/css">
+        #fm{
+            margin:0;
+            padding:10px 30px;
+        }
+        .ftitle{
+            font-size:14px;
+            font-weight:bold;
+            padding:5px 0;
+            margin-bottom:10px;
+            border-bottom:1px solid #ccc;
+        }
+        .fitem{
+            margin-bottom:5px;
+        }
+        .fitem label{
+            display:inline-block;
+            width:80px;
+        }
+        .fitem input{
+            width:160px;
+        }
+    </style>
+
+
+{% endblock %}
+

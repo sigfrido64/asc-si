@@ -1,0 +1,19 @@
+{% extends "base_popup.html" %}
+
+{% block title %}Cancellazione Cartella{% endblock %}
+
+{% block header %}Cancellazione Cartella{% endblock %}
+
+{% block body_block %}
+
+   <form method="post" class="form">
+        {% csrf_token %}
+        <strong>{{ folder.nome }}</strong>
+        <br/><br/>
+        ATTENZIONE - Questa Cartella verrà eliminata !
+        <br/><br>
+
+        <input class="btn btn-default" type="button" onclick="window.close()" value="Annulla">
+        <input class="btn btn-danger" type="submit" value="Conferma" />
+    </form>
+{% endblock %}

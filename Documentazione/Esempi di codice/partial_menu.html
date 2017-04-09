@@ -1,0 +1,42 @@
+<div id='jqxWidget' style='height: 35px;'>
+    <div id='jqxMenu' style='visibility: hidden;'>
+        <ul>
+            <li><a href='{% url 'index' %}'><i class="fa fa-home"></i></a></li>
+            <li id="iniziative"> <a href='{% url 'iniziative:index' %}'>Iniziative (Obsoleto)</a> </li>
+
+            {% if si_user.APP_ORDINI in si_perms %}
+            <li id="ordini"><a href="{% url 'op:index' %}">Ordini</a></li>
+            {% endif %}
+
+            {% if si_user.APP_AZIENDE in si_perms %}
+            <li id="aziende"><a href="{% url 'aziende:index' %}">Aziende</a></li>
+            {% endif %}
+
+            {% if si_user.APP_CORSI in si_perms %}
+            <li id="corsi"><a href="{% url 'corsi:index' %}">Corsi</a></li>
+            {% endif %}
+
+            {% if si_user.APP_ORDACQ in si_perms %}
+            <li id="ordacq"><a href="{% url 'ordacq:index' %}">Ordini Acquisto</a></li>
+            {% endif %}
+
+            <li id="mnu_logout"><a href="{% url 'logout' %}">
+                <i class="fa fa-sign-out"></i></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- Javascript del Menu Principale -->
+<script type="text/javascript">
+$(document).ready(function () {
+    // Create a jqxMenu
+    var menu = jQuery("#jqxMenu");
+    menu.jqxMenu({width: '100%', height: '30px'});
+    menu.css('visibility', 'visible');
+
+    // Add Tooltip text
+    $("#mnu_logout").jqxTooltip({ content: 'Logout.' });
+});
+</script>

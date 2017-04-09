@@ -1,0 +1,40 @@
+issue-4 : Inserire il link all'ordine nel documento del corso
+
+
+1 Settembre 2015
+Per cambiare la formattazione delle date ho aggiunto queste righe nel locale di jqeasyUI
+Così la formattazione delle date avviene secondo i ns. standard.
+
+
+$.extend($.fn.datebox.defaults,{
+	formatter:function(date){
+		var y = date.getFullYear();
+		var m = date.getMonth()+1;
+		var d = date.getDate();
+		return (d<10?('0'+d):d)+'/'+(m<10?('0'+m):m)+'/'+y;
+	},
+	parser:function(s){
+		if (!s) return new Date();
+		var ss = s.split('/');
+		var d = parseInt(ss[0],10);
+		var m = parseInt(ss[1],10);
+		var y = parseInt(ss[2],10);
+		if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+			return new Date(y,m-1,d);
+		} else {
+			return new Date();
+		}
+	}
+});
+
+
+1 Agosto 2015
+
+Nel file lib\site-packages\mongodbforms\documentoptions.py in <module>, line 7
+faccio la seguente modifica per evitare l'errore : cannot import name 'get_verbose_name' !!!
+
+#from django.db.models.options import get_verbose_name
+from django.utils.text import camel_case_to_spaces as get_verbose_name
+
+Per risolvere un problema nato con MongoDBforms !
+

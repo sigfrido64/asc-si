@@ -1,0 +1,32 @@
+{% extends "basejqx_old.html" %}
+
+{% block title %}Lista Iniziative{% endblock %}
+{% block page_head %}Lista Iniziative{% endblock %}
+
+{% block body_block %}
+
+    <table>
+     {{ form.your_name }}
+    </table>
+
+    <div align="center">
+        <input type="button" value="Salva" id="btnSalva" />
+        <input type="button" value="Annulla" id="btnAnnulla" />
+    </div>
+
+    <div id="jqxgrid"></div>
+
+{% endblock %}
+
+{% block javascript %}
+    <script>
+    $(document).ready(function ()
+        {
+            // Create jqxButton widgets.
+            $("#btnSalva").jqxButton({ width: 120, height: 40 });
+            $('#btnSalva').on('click', function () {$("#ff").submit()});
+            $("#btnAnnulla").jqxButton({ width: 120, height: 40 });
+            $('#btnAnnulla').on('click', function () {$("#ff").reset()});
+    });
+    </script>
+{% endblock %}

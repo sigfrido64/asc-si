@@ -1,0 +1,41 @@
+{% extends 'base-jqxrenamed.html' %}
+
+{% load si_templatetags %}
+
+{% block title %}{{ corso }} - Lista Segnalazioni{% endblock %}
+{% block header %}Segnalazioni per il corso : {{ corso }}{% endblock %}
+
+{% block body_block %}
+
+    {% si_dc_dialog %}
+
+    {% if lista_segnalazioni %}
+        <div>
+            <table class="easyui-datagrid">
+                <thead>
+                    <tr>
+                        <th data-options="field:'Azienda'">Azienda</th>
+                        <th data-options="field:'Contatto'">Contatto</th>
+                        <th data-options="field:'Segnalazioni'">Segnalazioni</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% for segnalazione in lista_segnalazioni %}
+                    <tr>
+                        <td>{{ segnalazione.azienda }}</td>
+                        <td>{{ segnalazione.contatto }}</td>
+                        <td>{{ segnalazione.persone }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="jumbotron">
+            Nessuna Presente !
+        </div>
+    {% endif %}
+{% endblock %}
+
+

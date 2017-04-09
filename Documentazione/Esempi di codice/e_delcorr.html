@@ -1,0 +1,44 @@
+{% extends 'base-jqxrenamed.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Errore !!{% endblock %}
+{% block header %}Errore Correlati !{% endblock %}
+
+{% block body_block %}
+
+ <div class="row col-md-8">
+    <div>
+        <p class="lead"><ins>Elemento : {{ elemento.nome }}</ins></p>
+        <p>
+            Non può essere cancellato perchè ci sono elementi correlati
+        </p>
+    </div>
+
+    <div>
+        <br>
+        <a class="btn btn-default" href="{{ indietro }}">Indietro</a>
+        <br><br>
+    </div>
+ </div>
+
+ <div class="row col-md-8">
+     <h4>Elementi Correlati</h4>
+
+    {% if correlati %}
+        <table class="table table-bordered">
+            <tr>
+                <th>Correlati</th>
+            </tr>
+            {% for correlato in correlati %}
+              <tr>
+                <td><li>{{ correlato }}</li></td>
+              </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <strong><mark>Nessun Correlato ! - Se leggi questo c'è un errore in quanto la lista dei correlati non dovrebbe essere vuota</mark></strong>
+    {% endif %}
+ </div>
+
+{% endblock %}

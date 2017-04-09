@@ -1,0 +1,342 @@
+         10620 function calls (9872 primitive calls) in 0.026 seconds
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+       11    0.000    0.000    0.026    0.002 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\queryset.py:64(_iter_results)
+        1    0.000    0.000    0.026    0.026 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\queryset.py:82(_populate_cache)
+    26/11    0.000    0.000    0.026    0.002 {built-in method next}
+       11    0.000    0.000    0.025    0.002 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\base.py:1401(__next__)
+       11    0.000    0.000    0.014    0.001 C:\Seafile\Py\si\lib\site-packages\pymongo\cursor.py:1092(next)
+        2    0.000    0.000    0.013    0.007 C:\Seafile\Py\si\lib\site-packages\pymongo\cursor.py:991(_refresh)
+        1    0.000    0.000    0.013    0.013 C:\Seafile\Py\si\lib\site-packages\pymongo\cursor.py:826(__send_message)
+        1    0.000    0.000    0.013    0.013 C:\Seafile\Py\si\lib\site-packages\pymongo\mongo_client.py:753(_send_message_with_response)
+        1    0.000    0.000    0.013    0.013 C:\Seafile\Py\si\lib\site-packages\pymongo\mongo_client.py:796(_reset_on_error)
+        1    0.000    0.000    0.013    0.013 C:\Seafile\Py\si\lib\site-packages\pymongo\server.py:70(send_message_with_response)
+        1    0.000    0.000    0.013    0.013 C:\Seafile\Py\si\lib\site-packages\pymongo\pool.py:237(receive_message)
+        1    0.000    0.000    0.013    0.013 C:\Seafile\Py\si\lib\site-packages\pymongo\network.py:119(receive_message)
+        2    0.000    0.000    0.013    0.006 C:\Seafile\Py\si\lib\site-packages\pymongo\network.py:145(_receive_data_on_socket)
+        2    0.013    0.006    0.013    0.006 {method 'recv' of '_socket.socket' objects}
+    48/10    0.001    0.000    0.012    0.001 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\document.py:678(_from_son)
+       48    0.002    0.000    0.010    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\document.py:41(__init__)
+    20/10    0.000    0.000    0.009    0.001 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\fields.py:286(to_python)
+    20/10    0.000    0.000    0.008    0.001 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\fields.py:307(<listcomp>)
+    38/10    0.000    0.000    0.008    0.001 C:\Seafile\Py\si\lib\site-packages\mongoengine\fields.py:545(to_python)
+       38    0.000    0.000    0.007    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\document.py:71(__init__)
+  886/848    0.001    0.000    0.004    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\document.py:148(__setattr__)
+  823/435    0.001    0.000    0.004    0.000 {built-in method setattr}
+  501/291    0.000    0.000    0.003    0.000 {built-in method getattr}
+      388    0.001    0.000    0.003    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\fields.py:118(__set__)
+      234    0.000    0.000    0.002    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\fields.py:108(__get__)
+      234    0.000    0.000    0.001    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\datastructures.py:391(get)
+      539    0.000    0.000    0.001    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\common.py:5(_import_class)
+       20    0.000    0.000    0.001    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\fields.py:238(__get__)
+      234    0.000    0.000    0.001    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\datastructures.py:377(__getitem__)
+      7/1    0.000    0.000    0.001    0.001 <frozen importlib._bootstrap>:2264(_handle_fromlist)
+      2/1    0.000    0.000    0.001    0.001 <frozen importlib._bootstrap>:313(_call_with_frames_removed)
+        1    0.000    0.000    0.001    0.001 {built-in method __import__}
+        1    0.000    0.000    0.001    0.001 <frozen importlib._bootstrap>:2234(_find_and_load)
+        1    0.000    0.000    0.001    0.001 <frozen importlib._bootstrap>:2207(_find_and_load_unlocked)
+      388    0.000    0.000    0.001    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\datastructures.py:384(__setitem__)
+      194    0.001    0.000    0.001    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\datastructures.py:449(__getattr__)
+1261/1260    0.000    0.000    0.001    0.000 {built-in method isinstance}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:2147(_find_spec)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1186(_load_unlocked)
+       48    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\datastructures.py:430(create)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1122(_exec)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\base.py:126(__getitem__)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1465(exec_module)
+      388    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\datastructures.py:458(__setattr__)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1934(find_spec)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1902(_get_spec)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:2016(find_spec)
+        3    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:68(_path_stat)
+        3    0.000    0.000    0.000    0.000 {built-in method stat}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1534(get_code)
+       12    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\base.py:1469(_cursor)
+       49    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\bson\son.py:89(__init__)
+        2    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\base.py:663(clone)
+        2    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\base.py:671(clone_into)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:87(_path_isfile)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:78(_path_is_mode_type)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\helpers.py:89(_unpack_response)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\base.py:1512(_query)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\visitor.py:88(to_query)
+        2    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\visitor.py:154(accept)
+        1    0.000    0.000    0.000    0.000 {built-in method decode_all}
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\visitor.py:77(visit_query)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\transform.py:29(query)
+       99    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\bson\son.py:184(update)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\base.py:89(__call__)
+        4    0.000    0.000    0.000    0.000 {built-in method __build_class__}
+     1109    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+       46    0.000    0.000    0.000    0.000 C:\Python34\lib\copy.py:67(copy)
+       48    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\document.py:1006(__set_field_display)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1621(get_data)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\manager.py:27(__get__)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\fields.py:89(prepare_query_value)
+      167    0.000    0.000    0.000    0.000 {built-in method hasattr}
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\message.py:253(get_message)
+       49    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\bson\son.py:95(__new__)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\re.py:217(compile)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\re.py:273(_compile)
+      242    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\document.py:688(<genexpr>)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:654(_compile_bytecode)
+        2    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\server.py:150(get_socket)
+      2/1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\document.py:171(_get_collection)
+       23    0.000    0.000    0.000    0.000 C:\Python34\lib\abc.py:178(__instancecheck__)
+        1    0.000    0.000    0.000    0.000 {built-in method loads}
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_compile.py:460(compile)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1423(find_spec)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1408(_search_registry)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\pool.py:220(send_message)
+       76    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\fields.py:536(document_type)
+        2    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\pool.py:514(get_socket)
+        1    0.000    0.000    0.000    0.000 {built-in method exec}
+        1    0.000    0.000    0.000    0.000 {method 'sendall' of '_socket.socket' objects}
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\dereference.py:1(<module>)
+      242    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\datastructures.py:432(<genexpr>)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1401(_open_registry)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\collection.py:1010(find)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1099(create)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\message.py:238(as_command)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\cursor.py:103(__init__)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\message.py:169(_gen_find_command)
+        2    0.000    0.000    0.000    0.000 {built-in method OpenKey}
+      2/1    0.000    0.000    0.000    0.000 C:\Python34\lib\contextlib.py:63(__exit__)
+       21    0.000    0.000    0.000    0.000 {built-in method sorted}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1019(init_module_attrs)
+       88    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\fields.py:64(to_python)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\topology.py:135(select_server)
+        4    0.000    0.000    0.000    0.000 C:\Python34\lib\copy.py:272(_reconstruct)
+       20    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\fields.py:301(<listcomp>)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1631(path_stats)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_parse.py:738(parse)
+        1    0.000    0.000    0.000    0.000 {method 'read' of '_io.FileIO' objects}
+       48    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\bson\objectid.py:68(__init__)
+        2    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\collection.py:75(__init__)
+      2/1    0.000    0.000    0.000    0.000 C:\Python34\lib\contextlib.py:57(__enter__)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\pool.py:586(return_socket)
+      331    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+       48    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\datastructures.py:373(__init__)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:437(cache_from_source)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\database.py:225(__getitem__)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:824(cached)
+        3    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\base.py:52(__init__)
+       10    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\document.py:154(fget)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\topology.py:83(select_servers)
+        1    0.000    0.000    0.000    0.000 {built-in method _query_message}
+       10    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\bson\objectid.py:252(__str__)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:261(__enter__)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\document.py:720(ensure_indexes)
+       48    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\fields.py:439(to_python)
+        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:50(_path_join)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_parse.py:351(_parse_sub)
+      291    0.000    0.000    0.000    0.000 {method 'keys' of 'dict' objects}
+       26    0.000    0.000    0.000    0.000 C:\Python34\lib\_weakrefset.py:70(__contains__)
+       38    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\fields.py:222(to_python)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_compile.py:445(_code)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\mongo_client.py:701(_get_topology)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_parse.py:429(_parse)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:599(_validate_bytecode_header)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\pool.py:551(_get_socket_no_auth)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\topology.py:58(open)
+       10    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\database.py:366(_fix_outgoing)
+       53    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x1DA74CB8}
+        2    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\periodic_executor.py:50(open)
+      144    0.000    0.000    0.000    0.000 {method 'pop' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\collection.py:219(__getattr__)
+        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:52(<listcomp>)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:274(_get_module_lock)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\thread_util.py:83(release)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\topology.py:271(_ensure_opened)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:56(_path_split)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\abc.py:194(__subclasscheck__)
+       96    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\signals.py:32(<lambda>)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\collection.py:235(__getitem__)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\thread_util.py:63(release)
+        2    0.000    0.000    0.000    0.000 C:\Python34\lib\threading.py:1109(is_alive)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:2011(_get_spec)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_compile.py:341(_compile_info)
+       96    0.000    0.000    0.000    0.000 {built-in method len}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:172(__init__)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\topology.py:312(_apply_selector)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\random.py:250(choice)
+       10    0.000    0.000    0.000    0.000 {built-in method hexlify}
+        2    0.000    0.000    0.000    0.000 C:\Python34\lib\contextlib.py:124(helper)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\document.py:925(_lookup_field)
+       20    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\fields.py:325(<listcomp>)
+        4    0.000    0.000    0.000    0.000 {method '__reduce_ex__' of 'object' objects}
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\bson\son.py:149(items)
+        2    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\common.py:503(__init__)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\common.py:370(validate_is_mapping)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\random.py:220(_randbelow)
+        4    0.000    0.000    0.000    0.000 C:\Python34\lib\copyreg.py:87(__newobj__)
+        5    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_parse.py:208(get)
+        6    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_parse.py:183(__next)
+        2    0.000    0.000    0.000    0.000 {method 'add' of 'set' objects}
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\server.py:34(open)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_compile.py:33(_compile)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\threading.py:329(notify)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:739(__exit__)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\topology_description.py:139(known_servers)
+        2    0.000    0.000    0.000    0.000 C:\Python34\lib\contextlib.py:37(__init__)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_parse.py:140(getwidth)
+       38    0.000    0.000    0.000    0.000 {built-in method proxy}
+        2    0.000    0.000    0.000    0.000 C:\Python34\lib\threading.py:1067(_wait_for_tstate_lock)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:884(spec_from_file_location)
+        4    0.000    0.000    0.000    0.000 {method 'format' of 'str' objects}
+        3    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\field_list.py:9(__init__)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:268(__exit__)
+       43    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        2    0.000    0.000    0.000    0.000 {built-in method allocate_lock}
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\bson\son.py:150(<listcomp>)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\re.py:235(escape)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\document.py:166(_get_db)
+        4    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\bson\son.py:106(__setitem__)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\monitor.py:69(open)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\_collections_abc.py:167(__subclasshook__)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:192(acquire)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\thread_util.py:38(acquire)
+        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:2120(__enter__)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1336(find_spec)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\visitor.py:114(__and__)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:45(_r_long)
+        3    0.000    0.000    0.000    0.000 {method 'rsplit' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:217(release)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_parse.py:178(__init__)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\topology_description.py:142(<listcomp>)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:129(_new_module)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\read_preferences.py:124(__ne__)
+        5    0.000    0.000    0.000    0.000 {method 'acquire' of '_thread.lock' objects}
+        2    0.000    0.000    0.000    0.000 {built-in method any}
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\pool.py:599(_check)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\base.py:1436(_cursor_args)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\cursor.py:502(__getitem__)
+       20    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\fields.py:688(<lambda>)
+       13    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\collection.py:263(database)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\visitor.py:96(_combine)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\topology.py:132(<listcomp>)
+        6    0.000    0.000    0.000    0.000 C:\Python34\lib\copy.py:125(_copy_with_constructor)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\bson\py3compat.py:47(itervalues)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\message.py:221(__init__)
+       11    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\bson\son.py:126(__iter__)
+        8    0.000    0.000    0.000    0.000 {method 'join' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\transform.py:40(<listcomp>)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\pool.py:354(__hash__)
+       36    0.000    0.000    0.000    0.000 C:\Python34\lib\copy.py:110(_copy_immutable)
+       10    0.000    0.000    0.000    0.000 {method 'decode' of 'bytes' objects}
+       10    0.000    0.000    0.000    0.000 {method 'rstrip' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\read_preferences.py:161(__eq__)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\cursor.py:289(__query_spec)
+        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:2124(__exit__)
+        3    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\datastructures.py:435(SpecificStrictDict)
+        5    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:518(_verbose_message)
+        4    0.000    0.000    0.000    0.000 {method 'rpartition' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\server_description.py:151(is_server_type_known)
+       10    0.000    0.000    0.000    0.000 {method 'popleft' of 'collections.deque' objects}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:790(__init__)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1591(__init__)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\helpers.py:139(_check_command_response)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\_weakrefset.py:81(add)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\response.py:22(__init__)
+        3    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_parse.py:138(append)
+        4    0.000    0.000    0.000    0.000 {built-in method unpack}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:534(_check_name_wrapper)
+        3    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\common.py:527(codec_options)
+        4    0.000    0.000    0.000    0.000 {method 'update' of 'dict' objects}
+        2    0.000    0.000    0.000    0.000 C:\Python34\lib\_collections_abc.py:170(<genexpr>)
+        4    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\visitor.py:151(__init__)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:842(parent)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\dereference.py:13(DeReference)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\message.py:197(<listcomp>)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\threading.py:249(_is_owned)
+        3    0.000    0.000    0.000    0.000 {method 'unpack' of 'Struct' objects}
+        2    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\server_description.py:66(address)
+        2    0.000    0.000    0.000    0.000 {method 'partition' of 'str' objects}
+        3    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\common.py:553(read_concern)
+        3    0.000    0.000    0.000    0.000 {built-in method getlower}
+        3    0.000    0.000    0.000    0.000 {built-in method getpid}
+        2    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_compile.py:442(isstring)
+        4    0.000    0.000    0.000    0.000 {built-in method issubclass}
+        3    0.000    0.000    0.000    0.000 {built-in method monotonic}
+        1    0.000    0.000    0.000    0.000 {method 'endswith' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_parse.py:726(fix_flags)
+        5    0.000    0.000    0.000    0.000 {method 'isdigit' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\queryset.py:25(__iter__)
+        1    0.000    0.000    0.000    0.000 {built-in method _fix_co_filename}
+        2    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\visitor.py:157(empty)
+        3    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\common.py:119(validate_boolean)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_parse.py:90(__init__)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:257(__init__)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:30(_relax_case)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\connection.py:160(get_db)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\transform.py:41(<listcomp>)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\pool.py:287(check_auth)
+        2    0.000    0.000    0.000    0.000 {method 'lstrip' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_parse.py:67(__init__)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\server.py:168(_split_message)
+        2    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1870(_path_importer_cache)
+        2    0.000    0.000    0.000    0.000 {built-in method from_bytes}
+        1    0.000    0.000    0.000    0.000 {built-in method compile}
+        1    0.000    0.000    0.000    0.000 {built-in method iter}
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\document.py:672(_get_collection_name)
+        1    0.000    0.000    0.000    0.000 {built-in method is_frozen}
+        2    0.000    0.000    0.000    0.000 C:\Python34\lib\threading.py:501(is_set)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:732(__enter__)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\visitor.py:68(__init__)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:728(__init__)
+        3    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\common.py:544(read_preference)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\base\fields.py:167(prepare_query_value)
+        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:742(<genexpr>)
+        2    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\server_description.py:70(server_type)
+        5    0.000    0.000    0.000    0.000 {built-in method release_lock}
+        4    0.000    0.000    0.000    0.000 {built-in method acquire_lock}
+        4    0.000    0.000    0.000    0.000 {built-in method id}
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\field_list.py:66(__bool__)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\read_preferences.py:93(mode)
+        3    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\database.py:156(name)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\pool.py:111(wait_queue_timeout)
+        2    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\monitoring.py:307(enabled_for_commands)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\topology.py:184(get_server_by_address)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1000(__init__)
+        4    0.000    0.000    0.000    0.000 {method 'getrandbits' of '_random.Random' objects}
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\read_concern.py:41(level)
+        1    0.000    0.000    0.000    0.000 C:\Python34\lib\sre_parse.py:202(match)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\response.py:48(request_id)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\collection.py:258(name)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\response.py:58(from_command)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\database.py:151(client)
+        1    0.000    0.000    0.000    0.000 {method 'pop' of 'list' objects}
+        2    0.000    0.000    0.000    0.000 {built-in method min}
+        2    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\bson\py3compat.py:53(_unicode)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\cursor.py:338(__check_okay_to_chain)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\response.py:53(duration)
+        2    0.000    0.000    0.000    0.000 {method 'values' of 'dict' objects}
+        2    0.000    0.000    0.000    0.000 {method 'release' of '_thread.lock' objects}
+        1    0.000    0.000    0.000    0.000 {built-in method hash}
+        2    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\topology_description.py:120(topology_type)
+        2    0.000    0.000    0.000    0.000 {built-in method get_ident}
+        2    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\common.py:534(write_concern)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:288(cb)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\server.py:155(description)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\topology.py:267(description)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\visitor.py:18(visit_query)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\server.py:164(pool)
+        3    0.000    0.000    0.000    0.000 {built-in method ord}
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\topology_description.py:82(check_compatible)
+        1    0.000    0.000    0.000    0.000 {built-in method abs}
+        1    0.000    0.000    0.000    0.000 {method 'bit_length' of 'int' objects}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1616(get_filename)
+        1    0.000    0.000    0.000    0.000 {method 'copy' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1266(find_spec)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\response.py:38(data)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:850(has_location)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\settings.py:79(server_selection_timeout)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\pymongo\response.py:43(address)
+        1    0.000    0.000    0.000    0.000 C:\Seafile\Py\si\lib\site-packages\mongoengine\queryset\base.py:1429(_collection)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 {method 'pop' of 'set' objects}
+
+

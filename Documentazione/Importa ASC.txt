@@ -1,0 +1,4 @@
+Marzo 2016
+
+Quando devo importare le Aziende devo cambiare il nome di Città in Citta senza accento per evitare errori di coding
+del nome del campo.

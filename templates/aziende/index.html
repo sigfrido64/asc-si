@@ -1,0 +1,139 @@
+{% extends 'basejqx_old.html' %}
+{% load staticfiles %}
+
+{% block title %}Lista Aziende{% endblock %}
+
+{% block javascript %}
+ <script type="text/javascript">
+        $(document).ready(function () {
+            var filtro = $("#filtro");
+            filtro.jqxButton();
+            filtro.on("click", function () {
+
+                $("#jqxgrid").jqxGrid('updatebounddata');
+            });
+            var url = "/si/aziende/api/get_listaaziende/";
+            var grid = $("#jqxgrid");
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'ragione_sociale' },
+                    { name: 'sedi' },
+                    { name: 'contatti' },
+                    { name: 'pk' }
+                ],
+                id: 'pk',
+                url: url,
+                root: 'data',
+                data: {
+                    style: "full",
+                    maxRows: 50
+                }
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                formatData: function (data) {
+                    $.extend(data, {
+                        filtroAzienda: $('#filtroAzienda').val(),
+                        style: "full",
+                        maxRows: 50
+                    });
+                return data;
+            }
+    });
+            grid.jqxGrid({
+                width: "100%",
+                source: dataAdapter,
+                columnsresize: true,
+                editable: false,
+                autoheight: true,
+                autorowheight: true,
+                pageable: true,
+                pagesize: 20,
+                filterable: true,
+                sortable: true,
+                autoshowfiltericon: true,
+                columns: [
+                    { text: 'Ragione Sociale', dataField: 'ragione_sociale', width: "40%" },
+                    { text: 'Sedi', dataField: 'sedi', width: "30%" },
+                    { text: 'Contatti', dataField: 'contatti', width: "30%" }
+                ],
+                showstatusbar: true,
+                renderstatusbar: function (statusbar) {
+                    // appends buttons to the status bar.
+                    var container = $("<div style='overflow: hidden; position: relative; margin: 5px;'></div>");
+                    var addButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='../../images/add.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Add</span></div>");
+                    var deleteButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='../../images/close.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Delete</span></div>");
+                    var reloadButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='../../images/refresh.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Reload</span></div>");
+                    var searchButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='../../images/search.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Find</span></div>");
+                    container.append(addButton);
+                    container.append(deleteButton);
+                    container.append(reloadButton);
+                    container.append(searchButton);
+                    statusbar.append(container);
+                    addButton.jqxButton({  width: 60, height: 20 });
+                    deleteButton.jqxButton({  width: 65, height: 20 });
+                    reloadButton.jqxButton({  width: 65, height: 20 });
+                    searchButton.jqxButton({  width: 50, height: 20 });
+                    // add new row.
+                    addButton.click(function (event) {
+                        var datarow = generatedata(1);
+                        $("#jqxgrid").jqxGrid('addrow', null, datarow[0]);
+                    });
+                    // delete selected row.
+                    deleteButton.click(function (event) {
+                        var selectedrowindex = $("#jqxgrid").jqxGrid('getselectedrowindex');
+                        var rowscount = $("#jqxgrid").jqxGrid('getdatainformation').rowscount;
+                        var id = $("#jqxgrid").jqxGrid('getrowid', selectedrowindex);
+                        $("#jqxgrid").jqxGrid('deleterow', id);
+                    });
+                    // reload grid data.
+                    reloadButton.click(function (event) {
+                        $("#jqxgrid").jqxGrid({ source: getAdapter() });
+                    });
+                    // search for a record.
+                    searchButton.click(function (event) {
+                        var offset = $("#jqxgrid").offset();
+                        $("#jqxwindow").jqxWindow('open');
+                        $("#jqxwindow").jqxWindow('move', offset.left + 30, offset.top + 30);
+                    });
+                },
+            });
+            grid.on("celldoubleclick", function (event) {
+                var args = event.args;
+                var rowBoundIndex = args.rowindex;
+                var colIndex = args.columnindex;
+                var value = $('#jqxgrid').jqxGrid('getcellvalue', rowBoundIndex, 'pk');
+                var url_mask = "{% url 'aziende:edit' pk=12345 %}".replace(/12345/, value.toString());
+                alert (colIndex);
+                popupCenter(url_mask, '80', '80');
+            });
+        });
+    </script>
+{% endblock %}
+
+
+{% block body_block %}
+
+<br>
+<div>
+    Filtro Ragione Sociale : <input type="text" id="filtroAzienda"/><input type="button" value="Go" id='filtro' /> <br><br>
+</div>
+
+<div id="jqxgrid"></div>
+
+<div style="margin-left: 30px; float: left;">
+    <div>
+        <input id="addrowbutton" type="button" value="Add New Row" />
+    </div>
+    <div style="margin-top: 10px;">
+        <input id="deleterowbutton" type="button" value="Delete Selected Row" />
+    </div>
+    <div style="margin-top: 10px;">
+        <input id="updaterowbutton" type="button" value="Update Selected Row" />
+    </div>
+</div>
+
+
+{% endblock %}

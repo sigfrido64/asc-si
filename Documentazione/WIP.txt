@@ -1,0 +1,14 @@
+01/02/2017
+Sistemazione pagina di login
+Sistemati i permessi in JSON in Postgres, rimane da capire come vengono gestiti nelle Views.
+
+Superuser :
+user : admin
+pwd : radice
+
+
+Password Postgres per Utente Postgres e database Postgres : radice
+Database ASC
+User ASC
+Pws Camerana
+

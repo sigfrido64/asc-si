@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load si_templatetags %}
+
+{% block javascript %}
+    <script src="{% static 'apps/ordacq/js/ordacq.js' %}"></script>
+{% endblock %}
+
+{% block Title %}
+    Acquisti
+{% endblock %}
+
+{% block content %}
+  <h3>Lista Ordini Acquisto</h3>
+
+  <!-- BUTTONS -->
+  <p id="buttons">
+    {% if user|can_add:app %}
+    <!-- Se ho i permessi : NUOVO ORDINE -->
+      <button type="button" class="btn btn-primary btn-sm js-create-ordacq"
+        data-url="{% url 'ordacq:create' %}">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Nuovo Acquisto
+      </button>
+    {% endif %}
+
+    {% if user|can_export:app %}
+    <!-- Se ho i permessi : ESPORTA XLS -->
+      <a href="{% url 'ordacq:export' %}" class="btn btn-primary btn-sm" role="button">
+        <i class="fa fa-download" aria-hidden="true"></i>
+        Esporta XLS
+      </a>
+    {% endif %}
+
+    {% if user|can_import:app %}
+    <!-- Se ho i permessi : IMPORTA XLS -->
+      <button type="button" class="btn btn-primary btn-sm js-import-ordacq"
+        data-url="{% url 'ordacq:import' %}">
+        <i class="fa fa-upload" aria-hidden="true"></i>
+        Importa XLS
+      </button>
+    {% endif %}
+  </p>
+
+  <table class="table table-sm table-hover table-bordered table-striped" id="ordacq-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th class="text-center">Protocollo</th>
+        <th class="text-center">Data</th>
+        <th class="text-center">Competenza</th>
+        <th class="text-center">Stato</th>
+        <th class="text-center">Fornitore</th>
+        <th class="text-center">Descrizione</th>
+        <th class="text-center">Azione</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% include 'ordacq/includes/partial_ordacq_list.html' %}
+    </tbody>
+  </table>
+
+  <!-- THE MODAL WE WILL BE USING -->
+  <div class="modal fade" id="modal-ordacq">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

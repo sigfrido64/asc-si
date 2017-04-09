@@ -1,0 +1,71 @@
+{% extends 'base-jqxrenamed.html' %}
+
+{% load si_templatetags %}
+
+{% block title %}Dettaglio Iniziativa{% endblock %}
+{% block header %}Dettaglio Iniziativa{% endblock %}
+
+{% block body_block %}
+
+{% si_dc_dialog %}
+
+
+<p class="thead">Iniziativa: {{ iniziativa.nome }}</p>
+
+<p>
+    Descrizione: {{ iniziativa.descrizione }}<br>
+    CUP/CIG: {{ iniziativa.cup_cig }}<br>
+    In uso : {{ iniziativa.in_uso|yesno:"Si,No" }}
+</p>
+
+<p>
+    <small>
+        Data Aggiornamento: {{ iniziativa.data_aggiornamento|date:"DATE_FORMAT" }}<br>
+        Data Creazione: {{ iniziativa.data_creazione|date:"DATE_FORMAT" }}
+    </small>
+</p>
+
+<p class="text-center">
+    <a class="easyui-linkbutton" iconCls="icon-back" href="{% url 'iniziative:index' %}">Indietro</a>
+    <a class="easyui-linkbutton" iconCls="icon-edit" href="{% url 'iniziative:edit' iniziativa.pk %}">Modifica</a>
+</p>
+
+
+{% if sottoiniziative %}
+    <table  class="easyui-datagrid" title="Sottoiniziative correlate">
+        <thead>
+            <tr>
+                <th data-options="field:'Nome'">Nome</th>
+                <th data-options="field:'Descrizione'">Descrizione</th>
+                <th data-options="field:'Azione'">Azione</th>
+            </tr>
+        </thead>
+        {% for sotto_iniziativa in sottoiniziative %}
+            <tr>
+                <td><a href="{% url 'iniziative:sub_detail' sotto_iniziativa.pk %}">{{ sotto_iniziativa.nome }}</a></td>
+                <td>{{ sotto_iniziativa.descrizione }}</td>
+                <td>
+                    <a titolo="Cancellazione Sotto-Iniziativa" item="{{ sotto_iniziativa.nome }}"
+                       link="{% url 'iniziative:sub_delete' sotto_iniziativa.pk %}"
+                       class="easyui-linkbutton remove_link" data-options="iconCls:'icon-cancel'" href="{% url 'index' %}">Del
+                    </a>
+                    <a class="easyui-linkbutton" iconCls="icon-edit" href="{% url 'iniziative:sub_edit' sotto_iniziativa.pk %}">Edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <div class="si-title">Sottoiniziative correlate</div>
+    <div class="jumbotron">
+        Nessuna Presente !
+    </div>
+{% endif %}
+
+<div align="center">
+    <p>
+        <a class="easyui-linkbutton" iconCls="icon-add" href="{% url 'iniziative:sub_add' iniziativa.pk %}">Aggiungi Sottoiniziativa</a>
+    </p>
+</div>
+
+{% endblock %}
+

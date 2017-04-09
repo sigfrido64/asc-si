@@ -1,0 +1,127 @@
+{% extends "basejqx_old.html" %}
+{% load staticfiles %}
+
+{% block title %}Corso{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = "/si/corsi/api/get_corsi/";
+            var grid = $("#jqxgrid");
+            // prepare the data
+            var source = {
+                datatype: "json",
+                datafields: [
+                    { name: 'codice' },
+                    { name: 'denominazione' },
+                    { name: 'durata' },
+                    { name: 'ordine' },
+                    { name: 'pk' },
+                ],
+                id: 'pk',
+                url: url,
+                root: 'data',
+                data: {
+
+                    style: "full",
+                    maxRows: 50
+                }
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            grid.jqxGrid({
+                width: "100%",
+                source: dataAdapter,
+                columnsresize: true,
+                autoheight: true,
+                autorowheight: true,
+                pageable: true,
+                pagesize: 20,
+                filterable: true,
+                sortable: true,
+                columns: [
+                    { text: 'Codice Corso', dataField: 'codice', width: "10%" },
+                    { text: 'Denominazione', dataField: 'denominazione', width: "70%" },
+                    { text: 'Durata', dataField: 'durata', width: "10%" },
+                    { text: 'Ordine', dataField: 'ordine', width: "10%" }
+                ],
+                showstatusbar: true,
+                renderstatusbar: function (statusbar) {
+                    // appends buttons to the status bar.
+                    var container = $("<div style='overflow: hidden; position: relative; margin: 5px;'></div>");
+                    var addButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='{% static "jqw/images/add.png" %}'/><span style='margin-left: 4px; position: relative; top: -3px;'>Add</span></div>");
+                    var deleteButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='{% static "jqw/images/close.png" %}'/><span style='margin-left: 4px; position: relative; top: -3px;'>Delete</span></div>");
+                    var reloadButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='{% static "jqw/images/refresh.png" %}'/><span style='margin-left: 4px; position: relative; top: -3px;'>Reload</span></div>");
+                    var searchButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='{% static "jqw/images/search.png" %}'/><span style='margin-left: 4px; position: relative; top: -3px;'>Find</span></div>");
+                    container.append(addButton);
+                    container.append(deleteButton);
+                    container.append(reloadButton);
+                    container.append(searchButton);
+                    statusbar.append(container);
+                    addButton.jqxButton({  width: 65, height: 20 });
+                    deleteButton.jqxButton({  width: 65, height: 20 });
+                    reloadButton.jqxButton({  width: 65, height: 20 });
+                    searchButton.jqxButton({  width: 50, height: 20 });
+                    // add new row.
+                    addButton.click(function (event) {
+                        window.location.href = "{% url 'corsi:add' %}";
+                        var datarow = generatedata(1);
+                        $("#jqxgrid").jqxGrid('addrow', null, datarow[0]);
+                    });
+                    // delete selected row.
+                    deleteButton.click(function (event) {
+                        var selectedrowindex = $("#jqxgrid").jqxGrid('getselectedrowindex');
+                        var rowscount = $("#jqxgrid").jqxGrid('getdatainformation').rowscount;
+                        var id = $("#jqxgrid").jqxGrid('getrowid', selectedrowindex);
+                        $("#jqxgrid").jqxGrid('deleterow', id);
+                    });
+                    // reload grid data.
+                    reloadButton.click(function (event) {
+                        $("#jqxgrid").jqxGrid({ source: getAdapter() });
+                    });
+                    // search for a record.
+                    searchButton.click(function (event) {
+                        var offset = $("#jqxgrid").offset();
+                        $("#jqxwindow").jqxWindow('open');
+                        $("#jqxwindow").jqxWindow('move', offset.left + 30, offset.top + 30);
+                    });
+                },
+            });
+            grid.on("celldoubleclick", function (event) {
+                var args = event.args;
+                var rowBoundIndex = args.rowindex;
+                var colIndex = args.columnindex;
+                var value = $('#jqxgrid').jqxGrid('getcellvalue', rowBoundIndex, 'pk');
+                var url_mask = "{% url 'corsi:edit' pk=12345 %}".replace(/12345/, value.toString());
+                window.location.href = url_mask;
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body_block %}
+
+<script>
+    function submitForm(){
+        document.getElementById("ff").submit();
+    }
+
+    function clearForm(){
+        document.getElementById("ff").reset();
+    }
+</script>
+
+<form id="ff" class="easyui-panel" method="post">
+    {% csrf_token %}
+<table>
+     {{ form }}
+</table>
+
+    <div align="center">
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" data-options="iconCls:'icon-save'">Salva</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" data-options="iconCls:'icon-clear'">Clear</a>
+    </div>
+</form>
+
+    <div id="jqxgrid"></div>
+
+{% endblock %}
+

@@ -1,0 +1,100 @@
+{% extends 'base-jqxrenamed.html' %}
+
+{% load staticfiles %}
+
+{% block title %}File System{% endblock %}
+{% block header %}File System{% endblock %}
+
+{% block body_block %}
+
+        {% comment %}
+            Mettere qui la parte relativa alle scorciatoie per il cammino
+        {% endcomment %}
+
+
+    {% if lista_inodes %}
+        <div class="row col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Cartella</th>
+                        <th>Descrizione</th>
+                        <th>Timestamp</th>
+                        <th>Azione</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% for inode in lista_inodes %}
+                    <tr>
+                        <td><li><a class="sphinxsidebar" href="{% url 'fs:index' inode.pk %}">{{ inode.nome }}</a></li></td>
+                        <td>{{ inode.descrizione }}</td>
+                        <td>{{ inode.size|filesizeformat }}</td>
+                        <td><h5><small>
+                            Creato : {{ inode.data_creazione }}<br>
+                            Modificato : {{ inode.data_aggiornamento }}
+                        </small></h5></td>
+                        <td>
+                            <a class="glyphicon glyphicon-remove" href="{% url 'fs:folder_delete' inode.pk %}" onclick="return showAddAnotherPopup(this);"></a>
+                            <a class="glyphicon glyphicon-edit" href="{% url 'fs:folder_edit' inode.pk %}" onclick="return showAddAnotherPopup(this);"></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="row col-md-8">
+            Nessuna Cartella Presente !
+        </div>
+    {% endif %}
+
+
+    {% if lista_files %}
+        <div class="row col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrizione</th>
+                        <th>Size</th>
+                        <th>Timestamp</th>
+                        <th>Azione</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% for file in lista_files %}
+                    <tr>
+                        <td><li><a href="/data/{{file.pathurl}}/{{file.url}}" download="{{file.nome}}">{{ file.nome }}</a></li></td>
+                        <td>{{ file.descrizione }}</td>
+                        <td>{{ file.size|filesizeformat }}</td>
+                        <td><h5><small>
+                            Creato : {{ file.data_creazione }}<br>
+                            Modificato : {{ file.data_aggiornamento }}
+                        </small></h5></td>
+                        <td>
+                            <a class="glyphicon glyphicon-remove" href="{% url 'fs:file_delete' file.pk %}" onclick="return showAddAnotherPopup(this);"></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="row col-md-8">
+            Nessun File Presente !
+        </div>
+    {% endif %}
+
+    <br>
+
+    <div class="row col-md-12" align="center">
+        <a class="btn btn-default" href="{{ su }}" role="button">Su di un livello</a>
+        <a class="btn btn-default" href="{{ up }}" onclick="return showAddAnotherPopup(this);" role="button">Upload File</a>
+        <a class="btn btn-default" href="{% url 'fs:folder_add' nodo %}" onclick="return showAddAnotherPopup(this);" role="button">Crea Cartella</a>
+    </div>
+
+{% endblock %}
+
+

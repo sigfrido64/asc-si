@@ -1,0 +1,66 @@
+{% load static %}<!DOCTYPE html>
+
+<html lang="it" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Titolo della pagina che viene sostituito nell'implementazione -->
+    <title>SI - {% block title %} Titolo {% endblock %}</title>
+
+    <!-- Mie informazioni sul sistema. -->
+    <meta name="description" content="Sistema Informatico Scuola Camerana">
+    <meta name="author" content="Pilone Ing. Sigfrido">
+
+    <!-- Iconcina del sistema -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static "images/favicon.ico" %}" >
+    <link rel="icon" type="image/x-icon" href="{% static "images/favicon.ico" %}" >
+
+    <!-- JQwidgets : CSS Specifici -->
+    <link rel="stylesheet" href="{% static "jqw/jqwidgets/styles/jqx.base.css" %}" type="text/css" />
+    <link rel="stylesheet" href="{% static "jqw/jqwidgets/styles/jqx.darkblue.css" %}" type="text/css" />
+
+    <!-- Eventuali CSS addizionali -->
+    {% block stylesheet %}{% endblock %}
+
+    <!-- Icone Gliph Bootstrap -->
+    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet" />
+
+    <!-- JQwidgets : Javascript Specifici -->
+    <script type="text/javascript" src="{% static "jqw/scripts/jquery-1.11.1.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "jqw/jqwidgets/jqxcore.js" %}"></script>
+    <script type="text/javascript" src="{% static "jqw/jqwidgets/jqx-all.js" %}"></script>
+    <script type="text/javascript" src="{% static "jqw/jqwidgets/globalization/globalize.js" %}"></script>
+</head>
+
+<body>
+    <!-- Toolbar -->
+    {% block toolbar %}{% include "includes/menu_include.html" %}{% endblock %}
+
+    <!-- Page Head -->
+    <h3>{% block page_head %}{% endblock %}</h3>
+
+    <!-- Area di Testo -->
+    <div>
+    {% block body_block %} Area di testo {% endblock %}
+    </div>
+
+
+    <script type="text/javascript">
+        $.jqx.theme = 'darkblue';
+
+    function mostraErrore(elemento, messaggio) {
+        elemento.jqxTooltip({ content: messaggio, position: 'top', autoHide: false, trigger: "none", closeOnClick: false });
+        elemento.jqxTooltip("open");
+    }
+        function popupCenter(url) {
+        var left = ($(window).width() / 2) - (900 / 2);
+        var top = ($(window).height() / 2) - (600 / 2);
+        window.open (url, "popup", "width=900 height=600, top=" + top + ", left=" + left);
+    }
+    </script>
+</body>
+</html>

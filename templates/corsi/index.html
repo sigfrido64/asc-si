@@ -1,0 +1,359 @@
+{% extends 'basejqx.html' %}
+
+{% block title %}Lista Corsi{% endblock %}
+
+{% block body_block %}
+
+<br>
+
+<div id="jqxwindow">
+    <div>&nbsp;</div>
+    <div><p align="center">ATTENZIONE !!!</p><br>
+        <p align="left">
+            Si sta per eliminare definitivamente un elemento dal data base.<br>
+            L'operazione non potrà essere annullata. <br><br>
+            Elemento : XXX
+            <br><br>
+            Annullo operazione ?<br><br>
+        </p>
+        <p align="center">
+                <input type="button" value="Si" id="button_yes"/>
+                <input type="button" value="No" id="button_no"/>
+        </p>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Zona di interfaccia interna Javascript.
+        // Finestra di conferma della cancellazione.
+        var myjs_finestra = $("#jqxwindow");
+        var myjs_grid = $("#jqxgrid");
+        var myjs_content1 = '<p align="center">ATTENZIONE !!!</p><br>' +
+                '<p align="left">' +
+                'Si sta per eliminare definitivamente un elemento dal data base.<br>' +
+                "L'operazione non potrà essere annullata. <br><br>" +
+                'Elemento : ';
+        var myjs_content2 = '<br><br>Annullo operazione ?<br><br></p>' +
+            '<p align="center">' +
+            '<input type="button" value="Si" id="button_yes"/>' +
+            '<input type="button" value="No" id="button_no"/></p>';
+
+        // !! Qui inizia il codice che NON DEVE essere modificato !!
+        // Definizione della finestra per conferma cancellazione
+        myjs_finestra.jqxWindow({
+            height: 'auto',
+            width: 'auto',
+            autoOpen: false,
+            isModal: true,
+            showCloseButton: false,
+            okButton: $('#button_yes')
+        });
+        // Creo il callback di cancellazione dopo aver chiuso la finestra.
+        myjs_finestra.find("#button_no").on('click', function(){
+            myjs_finestra.jqxWindow('close');
+            myjs_grid.jqxGrid('deleterow', myjs_finestra.id)
+        });
+
+        // Creo il metodo per aprire la finestra e lanciare il codice quando serve.
+        // Definisco la variabile in cui memorizzare l'ID dell'elemento che poi, se decido di si, sarà
+        // cancellato.
+        // dj_finestra.id = null;
+        confermaCancellazione = function(par_id, par_elemento) {
+            // par_id è sicuramente valido perchè lo controllo prima della chiamata.
+            // Salva id nella variabile locale.
+            myjs_finestra.id = par_id;
+
+            // Reimposta il contenuto della finstra mostrando l'elmento che mi viene passato.
+            var linea = myjs_content1 + par_elemento + myjs_content2;
+            myjs_finestra.jqxWindow('setContent',linea);
+
+            // Devo riassociare i pulsanti perchè con 'setContent' mi perde i riferimenti.
+            myjs_finestra.jqxWindow({okButton: $('#button_yes')});
+            // Creo il callback di cancellazione dopo aver chiuso la finestra.
+            myjs_finestra.find("#button_no").on('click', function(){
+                myjs_finestra.jqxWindow('close');
+                myjs_grid.jqxGrid('deleterow', myjs_finestra.id)
+            });
+
+            // Mostra la finestra.
+            myjs_finestra.jqxWindow('open');
+        };
+    });
+</script>
+
+<div id="popup">
+    <div>&nbsp;</div>
+    <div>
+        Segnaposto
+        <br><br><p align="center"><input type="button" value="Ok" id="button_ok"/></p>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Zona di interfaccia interna Javascript.
+        // myjs_button ripete fedelmente quello qui sopra perchè quando vado a sostituire il testo con 'setContent'
+        // me lo deve dare uguale. In questo modo la finestra ha sempre autosize funzionante.
+        // Finestra di popup che mostra un messaggio.
+        var myjs_popUp = $("#popup");
+        var myjs_button = '<br><br><p align="center"><input type="button" value="Ok" id="button_ok"/></p>';
+
+        // !! Qui inizia il codice che NON DEVE essere modificato !!
+        // Definizione della finestra che mostra il messaggio di avviso.
+        myjs_popUp.jqxWindow({
+            height: 'auto',
+            width: 'auto',
+            autoOpen: false,
+            isModal: true,
+            showCloseButton: false,
+            okButton: $('#button_ok')
+        });
+
+        // Mostro il messaggio dell'utente.
+        mostraMessaggio = function(messaggio) {
+            // Imposto il messaggio e lo mostro. Riassocio ok button perchè con il 'setContent' lo perde.
+            var linea = messaggio + myjs_button;
+            myjs_popUp.jqxWindow('setContent',linea);
+            myjs_popUp.jqxWindow({okButton: $('#button_ok')});
+            myjs_popUp.jqxWindow('open');
+        };
+    });
+</script>
+
+<div id="jqxgrid"></div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    // Zona di interfaccia Javascript con Django.
+    // !!! ATTENZIONE !!!
+    // Nel caso il link preveda un parametro lo devo mettere a valore 12345 così che poi, alla fine, venga
+    // modificato di conseguenza nel resto del codice.
+    var dj_url_add = "{% url 'corsi:add' %}";
+    var dj_url_del = "{% url 'corsi:del' %}";
+    var dj_url_edit = "{% url 'corsi:edit' pk=12345 %}";
+    var dj_url_detail = "{% url 'corsi:edit' pk=12345 %}";
+    // Interfaccia con la sorgente dati
+    // Questa parte si interfaccia direttamente con l'API della View di Django per cui i campi dovrebbero coincidere.
+    var dj_sourcedata_url = "/si/corsi/api/get_corsi/";
+    var dj_sourcedata_max_row = 50;
+    var dj_sourcedata_data = [
+            { name: 'codice' },
+            { name: 'denominazione' },
+            { name: 'durata' },
+            { name: 'ordine' },
+            { name: 'pk' },
+    ];
+    // Interfaccia con la griglia vera e propria. Sono quasi sempre i campi del dj_source_data con in più
+    // le indicazioni di come voglio che vengano visualizzati e tutti i casi particolari.
+    var dj_grid_columns = [
+            { text: 'Codice Corso', dataField: 'codice', width: "10%" },
+            { text: 'Denominazione', dataField: 'denominazione', width: "70%" },
+            { text: 'Durata', dataField: 'durata', width: "10%" },
+            { text: 'Ordine', dataField: 'ordine', width: "10%" }
+    ];
+    // Qui finisce la zone di interfaccia a monte con Django.
+
+    // Zona di interfaccia interna Javascript.
+    // Finestra di popup che mostra un messaggio.
+    var myjs_grid = $("#jqxgrid");
+    // !! Qui inizia il codice che NON DEVE essere modificato !!
+
+    // Creo l'interfaccia con i dati per il Data Adapter.
+    var source = {
+        datatype: "json",
+        datafields: dj_sourcedata_data,
+        id: 'pk',
+        url: dj_sourcedata_url,
+        root: 'data',
+        data: {
+            style: "full",
+            maxRows: dj_sourcedata_max_row
+        },
+        deleterow: function (rowid, commit) {
+            // Sincronizza con il server mandando il comando di delete e da alla griglia il risultato con commit
+            $.ajax({url: dj_url_del,
+                type: "POST",
+                data: {pk: rowid},
+                success: function (data){
+                    if (data.status=='success'){
+                        commit(true);
+                    }
+                    else {
+                        mostraMessaggio(data.message);
+                        commit(false);
+                    }
+                }
+            })
+        }
+    };
+    // Adesso creo il Data Adapter in modo che, dinamicamente, usi il valore del filtro per fare una
+    // pre-selezione dei dati.
+    var dataAdapter = new $.jqx.dataAdapter(source, {
+        formatData: function (data) {
+            // Usando questa modalità modifico la variabile 'data'.
+            $.extend(data, {
+                filtro: $('#filtro').val(),
+                style: "full",
+                maxRows: dj_sourcedata_max_row
+            });
+        return data;
+        }
+    });
+
+    // Creo la griglia vera e propria.
+    myjs_grid.jqxGrid({
+        theme: $.jqx.theme,
+        width: "100%",
+        source: dataAdapter,
+        columnsresize: true,
+        editable: false,
+        autoheight: true,
+        autorowheight: true,
+        pageable: true,
+        pagesize: 20,
+        filterable: true,
+        sortable: true,
+        autoshowfiltericon: true,
+        columns: dj_grid_columns,
+        showstatusbar: true,
+        renderstatusbar: function (statusbar) {
+            // Crea i pulsanti per la status bar.
+            var container = $("<div style='overflow: hidden; position: relative; margin: 5px;'></div>");
+
+            // Se do un url per aggiungere record aggiunge il pulsante Add.
+            if (dj_url_add) {
+                // Definisce il pulsante e lo aggiunge alla status bar.
+                var addButton = $("<div style='float: left; margin-left: 5px;'>" +
+                    "<i style='color:green; position: relative; margin-top: 2px;' class='fa fa-plus'/>" +
+                    "<span style='margin-left: 4px; position: relative; top: -3px;'>Add</span></div>");
+                container.append(addButton);
+                addButton.jqxButton({  width: 65, height: 20 });
+                // Gli associa la funzione di callback.
+                addButton.click(function (event) {
+                    window.location.href = dj_url_add;
+                });
+            }
+
+            // Se do un url per cancellare un record aggiunge il pulsante Del.
+            if (dj_url_del) {
+                // Definisce il pulsante e lo aggiunge alla status bar.
+                var deleteButton = $("<div style='float: left; margin-left: 5px;'>" +
+                    "<i style='color:red; position: relative; margin-top: 2px;' class='fa fa-remove'/>" +
+                    "<span style='margin-left: 4px; position: relative; top: -3px;'>Delete</span></div>");
+                container.append(deleteButton);
+                deleteButton.jqxButton({  width: 65, height: 20 });
+                // Gli associa la funzione di callback.
+                deleteButton.click(function (event) {
+                    // Prendo il riferimento della riga che è stata selezionata.
+                    var selectedrowindex = myjs_grid.jqxGrid('getselectedrowindex');
+                    var id = myjs_grid.jqxGrid('getrowid', selectedrowindex);
+                    // Se non ho selezionato nulla avviso l'utente ed esco.
+                    if (!id) {
+                        mostraMessaggio("Devi prima selezionare un elemento !!!");
+                        return;
+                    }
+                    // Altrimenti compongo la linea per chiedere conferma della cancellazione.
+                    var data = myjs_grid.jqxGrid('getrowdata', selectedrowindex);
+                    var linea = data ['codice'] + ' - ' + data ['denominazione'];
+                    // Mostra il messaggio di conferma ed attende indicazioni dall'utente.
+                    confermaCancellazione(id, linea);
+                });
+            }
+
+            // Inserisco il pulante reload.
+            var reloadButton = $("<div style='float: left; margin-left: 5px;'>" +
+                "<i style='color:green; position: relative; margin-top: 2px;' class='fa fa-refresh'/>" +
+                "<span style='margin-left: 4px; position: relative; top: -3px;'>Reload</span></div>");
+            container.append(reloadButton);
+            reloadButton.jqxButton({  width: 65, height: 20 });
+            // Gli associa la funzione di callback.
+            reloadButton.click(function (event) {
+                myjs_grid.jqxGrid('updatebounddata');
+            });
+
+            // Se do un url per editare un record aggiunge il pulsante Edit.
+            if (dj_url_edit) {
+                var editButton = $("<div style='float: left; margin-left: 5px;'>" +
+                    "<i style='color:yellow; position: relative; margin-top: 2px;' class='fa fa-edit'/>" +
+                    "<span style='margin-left: 4px; position: relative; top: -3px;'>Modifica</span></div>");
+                container.append(editButton);
+                editButton.jqxButton({  width: 80, height: 20 });
+                // Gli associo la funzione di callback.
+                editButton.click(function (event) {
+                    // Prendo il riferimento della riga che è stata selezionata.
+                    var selectedrowindex = myjs_grid.jqxGrid('getselectedrowindex');
+                    var id = myjs_grid.jqxGrid('getrowid', selectedrowindex);
+                    // Se non ho selezionato nulla avviso l'utente ed esco.
+                    if (!id) {
+                        mostraMessaggio("Devi prima selezionare un elemento !!!");
+                        return;
+                    }
+                    // Altrimenti vado alla pagina di editing.
+                    var url_go = dj_url_edit.replace(/12345/, id.toString());
+                    window.location.href = url_go;
+                });
+                statusbar.append(container);
+             };
+
+            // Inserisco il pulsante print.
+            var printButton = $("<div style='float: left; margin-left: 5px;'>" +
+                "<i style='color:green; position: relative; margin-top: 2px;' class='fa fa-print'/>" +
+                "<span style='margin-left: 4px; position: relative; top: -3px;'>Stampa</span></div>");
+            container.append(printButton);
+            printButton.jqxButton({  width: 70, height: 20 });
+            // Gli associo la funzione di callback.
+            printButton.click(function (event) {
+                var gridContent = myjs_grid.jqxGrid('exportdata', 'html');
+                var newWindow = window.open('', '', 'width=800, height=500'),
+                document = newWindow.document.open(),
+                pageContent =
+                    '<!DOCTYPE html>\n' +
+                    '<html>\n' +
+                    '<head>\n' +
+                    '<meta charset="utf-8" />\n' +
+                    '<title>Stampa</title>\n' +
+                    '</head>\n' +
+                    '<body>\n' + gridContent + '\n</body>\n</html>';
+                document.write(pageContent);
+                document.close();
+                newWindow.print();
+            });
+            statusbar.append(container);
+
+        },
+        showtoolbar: true,
+        rendertoolbar: function (toolbar) {
+            var container = $("<div style='margin: 5px;'></div>");
+            var span = $("<span style='float: left; margin-top: 5px; margin-right: 4px;'>Filtro : </span>");
+            var input = $("<input class='jqx-input jqx-widget-content jqx-rc-all' id='filtro' type='text' style='height: 23px; float: left; width: 223px;' />");
+            var buttonGoFilter = $("<input style='margin-left: 4px;' type='button' value='Go'/>");
+            toolbar.append(container);
+            container.append(span);
+            container.append(input);
+            container.append(buttonGoFilter);
+            // Definisce il pulsante.
+            buttonGoFilter.jqxButton();
+            // Associa funzione di callback che chiede refresh della griglia.
+            buttonGoFilter.click(function () {
+                myjs_grid.jqxGrid('updatebounddata');
+            });
+            input.addClass('jqx-widget-content-' + $.jqx.theme);
+            input.addClass('jqx-rc-all-' + $.jqx.theme);
+        }
+    });
+
+    // Se do un url per il dettaglio del record lo segue in caso di double click !
+    // Associa al double-click la chiamata dell'url di visualizzazione di dettaglio.
+    myjs_grid.on("celldoubleclick", function (event) {
+        if (dj_url_detail) {
+            var args = event.args;
+            var rowBoundIndex = args.rowindex;
+            var value = myjs_grid.jqxGrid('getcellvalue', rowBoundIndex, 'pk');
+            var url_go = dj_url_detail.replace(/12345/, value.toString());
+            window.location.href = url_go;
+        }
+    });
+});
+</script>
+
+{% endblock %}
+
